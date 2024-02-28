@@ -55,7 +55,7 @@
             </field>
         </record>
 
-        <menuitem id="menu_partner" name="Khách hàng" sequence="1"
+        <menuitem id="menu_partner" name="Khách hàng" sequence="10"
                   web_icon="xetaicu,static/img/partner.png"
                   groups="base.group_user"/>
         <menuitem id="menu_sub_partner" name="Danh sách khách hàng" parent="menu_partner" action="action_view_partner"

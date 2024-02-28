@@ -18,6 +18,7 @@
         'views/sale.xml',
         'views/xe_xetaicu.xml',
         'views/filter.xml',
+        'views/website_template.xml',
 
     ],
 

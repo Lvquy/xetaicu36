@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="menu_xetai" model="website.menu">
+            <field name="name">Xe đang bán</field>
+            <field name="url">/list_xe</field>
+            <field name="parent_id" ref="website.main_menu"/>
+            <field name="sequence" type="int">1</field>
+        </record>
+    </data>
+
+
+    <template id="list_xe">
+        <t t-call="website.layout">
+            <t t-set="title">Xe đang bán</t>
+            <div class="oe_structure">
+                <div class="container">
+                    <nav aria-label="breadcrumb" class="nav mt-5">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a href="/">Trang chủ</a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">
+                                Xe tải cũ
+                            </li>
+                        </ol>
+                    </nav>
+                    <h2 class="col-12 text-success text-center mt-5 mb-2 mt-2">XE ĐANG RAO BÁN</h2>
+                    <div class="col-12 product_pager form-inline justify-content-center mt-3 mb-3 mr-2">
+                        <form action="/list_xe/" method="get" enctype="multipart/form-data" name="list_xe"
+                              class="s_website_form form-horizontal container-fluid mt32 mb-2">
+                        </form>
+                    </div>
+                    <div class="row">
+                        <t t-foreach="XETAI" t-as="s">
+                            <div class="col-4 text-center">
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <td style="border-right-width:0px;">
+                                            <a t-att-href="'/list_xe/details/%s' %slug(s)" intemprop="url"
+                                               target="">
+                                                <img t-att-src="'/web/image/xe.xetaicu/%s/img_xe' % s.id" alt="img"
+                                                     style="width:100px"/>
+                                            </a>
+                                        </td>
+                                        <td class="text-left" style="border-left-width:0px;">
+                                            <t t-esc="s.name"/>
+                                            <br/>
+                                            <t t-esc="s.bien_ks"/>
+                                            <br/>
+                                            <t t-if="s.hang_xe != '0'">
+                                                <t t-if="s.hang_xe == 'hn'">
+                                                    HINO
+                                                </t>
+
+                                                <t t-if="s.hang_xe == 'is'">
+                                                    ISUZU
+                                                </t>
+
+                                                <t t-if="s.hang_xe == 'hd'">
+                                                    HYNDAI
+                                                </t>
+
+                                                <t t-if="s.hang_xe == 'fu'">
+                                                    FUSO
+                                                </t>
+
+                                                <t t-if="s.hang_xe == 'da'">
+                                                    DAEWOO
+                                                </t>
+
+                                                <t t-if="s.hang_xe == 'th'">
+                                                    THACO
+                                                </t>
+
+                                                <t t-if="s.hang_xe == 'ja'">
+                                                    JAC
+                                                </t>
+                                                <t t-if="s.hang_xe == 'tm'">
+                                                    TMT CỬU LONG
+                                                </t>
+                                            </t>
+                                            <br/>
+                                            <t t-esc="s.gia_dang_ban"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </t>
+                        <div class="col-12 product_pager form-inline justify-content-center mt-3 mb-3">
+                            <t t-call="website.pager"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="xe_details">
+        <t t-call="website.layout">
+            <t t-set="title">
+                <t t-esc="xe.sudo().name"/>
+            </t>
+
+            <div class="oe_structure">
+                <div class="container">
+                    <nav aria-label="breadcrumb" class="nav mt-5">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a href="/">Trang chủ</a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a href="/list_xe">Xe đang bán</a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">
+                                <t t-esc="xe.sudo().bien_ks"/>
+                            </li>
+                        </ol>
+                    </nav>
+                    <div class="row">
+                        <h1 class="col-12 text-success text-center mt-5 mb-2">
+                            <t t-esc="xe.sudo().name"/>
+                        </h1>
+                        <table class="table col-4">
+                            <tr>
+                                <td class="align-middle">
+                                    <img t-att-src="'/web/image/xe.xetaicu/%s/img_xe' % xe.id" alt="img"
+                                         style="width:300px"/>
+                                </td>
+                            </tr>
+                        </table>
+                        <table class="table col-8">
+                            <tr>
+                                <td>Biển kiểm soát</td>
+                                <td>
+                                    <t t-esc="xe.sudo().bien_ks"/>
+                                </td>
+                            </tr>
+                            <tr t-if="xe.sudo().hang_xe != '0'">
+                                <td>Hãng</td>
+                                <td>
+                                    <t t-if="xe.sudo().hang_xe == 'hn'">
+                                        HINO
+                                    </t>
+
+                                    <t t-if="xe.sudo().hang_xe == 'is'">
+                                        ISUZU
+                                    </t>
+
+                                    <t t-if="xe.sudo().hang_xe == 'hd'">
+                                        HYNDAI
+                                    </t>
+
+                                    <t t-if="xe.sudo().hang_xe == 'fu'">
+                                        FUSO
+                                    </t>
+
+                                    <t t-if="xe.sudo().hang_xe == 'da'">
+                                        DAEWOO
+                                    </t>
+
+                                    <t t-if="xe.sudo().hang_xe == 'th'">
+                                        THACO
+                                    </t>
+
+                                    <t t-if="xe.sudo().hang_xe == 'ja'">
+                                        JAC
+                                    </t>
+                                    <t t-if="xe.sudo().hang_xe == 'tm'">
+                                        TMT CỬU LONG
+                                    </t>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Xem xe tại</td>
+                                <td>
+                                    <t t-esc="xe.sudo().xem_xe_tai"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Màu sơn</td>
+                                <td>
+                                    <t t-esc="xe.sudo().mau_son"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Năm sản xuất</td>
+                                <td>
+                                    <t t-esc="xe.sudo().nam_sx"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Kích thước (R*D*C)</td>
+                                <td>
+                                    <t t-esc="xe.sudo().kich_thuoc"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Tải trọng</td>
+                                <td>
+                                    <t t-esc="xe.sudo().tai_trong"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Tên động cơ(Model)</td>
+                                <td>
+                                    <t t-esc="xe.sudo().ten_dong_co"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Dung Tích</td>
+                                <td>
+                                    <t t-esc="xe.sudo().dung_tich"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Đăng kiểm tới</td>
+                                <td>
+                                    <t t-esc="xe.sudo().dang_kiem_toi"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Giá</td>
+                                <td>
+                                    <t t-esc="xe.sudo().gia_dang_ban"/>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <div class="col-12 col-sm-6 p-2 text-center">
+                            <img t-att-src="'/web/image/xe.xetaicu/%s/img_xe_1' % xe.id" alt="img"
+                                 style="width:280px"/>
+                        </div>
+                        <div class="col-12 col-sm-6 p-2 text-center">
+                            <img t-att-src="'/web/image/xe.xetaicu/%s/img_xe_2' % xe.id" alt="img"
+                                 style="width:280px"/>
+                        </div>
+                        <div class="col-12 col-sm-6 p-2 text-center">
+                            <img t-att-src="'/web/image/xe.xetaicu/%s/img_xe_3' % xe.id" alt="img"
+                                 style="width:280px"/>
+                        </div>
+                        <div class="col-12 col-sm-6 p-2 text-center">
+                            <img t-att-src="'/web/image/xe.xetaicu/%s/img_xe_4' % xe.id" alt="img"
+                                 style="width:280px"/>
+                        </div>
+                        <div class="col-12">
+                            <h4>Chi tiết xe</h4>
+                            <hr/>
+                            <style>
+                                .xuong-dong {
+                                white-space: pre-line;
+                                }
+                            </style>
+                            <span class="xuong-dong">
+                                <t t-esc="xe.sudo().sale_content"/>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

@@ -21,7 +21,16 @@ class Xetai(models.Model):
     _name = 'xe.xetaicu'
     _description = 'Xe tai cu'
 
+    dang_ban = fields.Boolean(string='Đăng bán trên web', default=False)
     name = fields.Char(string='Tên xe')
+    mau_son = fields.Char(string='Màu sơn')
+    nam_sx = fields.Integer(string='Năm sản xuất')
+    kich_thuoc = fields.Char(string='Kích thước(D*R*C)')
+    tai_trong = fields.Char(string='Tải trọng')
+    ten_dong_co = fields.Char(string='Tên động cơ')
+    dung_tich = fields.Integer(string='Dung tích')
+    dang_kiem_toi = fields.Char(string='Đăng kiểm tới')
+    xem_xe_tai = fields.Char(string='Xem xe tại')
     hang_xe = fields.Selection([
         ('0', 'Chọn hãng xe'),
         ('hn', 'HINO'),
@@ -41,9 +50,10 @@ class Xetai(models.Model):
     bien_ks = fields.Char(string='Biển số xe')
     dang_ky = fields.Image(string='Ảnh đăng ký')
     dang_kiem = fields.Image(string='Ảnh đăng kiểm')
+    sale_content = fields.Html(string='Nội dung trên website')
     status = fields.Selection([('0', 'Mới tạo'), ('kho', 'Trong kho'), ('ban', 'Đã bán')], default='0',
                               string='Tình trạng xe')
-    note = fields.Text(string='Ghi chú')
+    note = fields.Text(string='Ghi chú nội bộ')
     ngay_mua = fields.Date(string='Ngày mua')
     ngay_ban = fields.Date(string='Ngày bán')
     don_mua = fields.Many2one('muaxe.xetaicu', string='Đơn mua')
@@ -51,6 +61,25 @@ class Xetai(models.Model):
     don_ban = fields.Many2one('banxe.xetaicu', string='Đơn bán')
     gia_ban = fields.Integer(string='Giá bán')
     loi = fields.Integer(string='Lời')
+    gia_dang_ban = fields.Char(string='Giá đăng bán trên website')
+    mua_tu = fields.Many2one('partner.xetaicu', string='Mua từ đâu')
+    ban_cho = fields.Many2one('partner.xetaicu', string='Bán cho ai')
+
+    def change_dang_ban(self):
+        for rec in self:
+            if rec.status == 'kho':
+                rec.dang_ban = not rec.dang_ban
+            else: rec.dang_ban = False
+    def change_status_kho(self):
+        for rec in self:
+            rec.status = 'kho'
+    def change_status_ban(self):
+        for rec in self:
+            rec.status = 'ban'
+
+    def change_status_0(self):
+        for rec in self:
+            rec.status = '0'
 
     @api.onchange('gia_mua','gia_ban')
     def compute_loi(self):
@@ -91,6 +120,7 @@ class Muaxe(models.Model):
                 rec.xe.don_mua = rec.id
                 rec.xe.gia_mua = rec.gia
                 rec.xe.loi = rec.xe.gia_ban - rec.xe.gia_mua
+                rec.xe.mua_tu = rec.nguoi_ban
 
     def unconfirm_don(self):
         for rec in self:
@@ -101,6 +131,7 @@ class Muaxe(models.Model):
                 rec.xe.ngay_mua = False
                 rec.xe.don_mua = False
                 rec.xe.loi = rec.xe.gia_ban - rec.xe.gia_mua
+                rec.xe.mua_tu = False
 
 
 class Banxe(models.Model):
@@ -128,6 +159,7 @@ class Banxe(models.Model):
                 rec.xe.don_ban = rec.id
                 rec.xe.gia_ban = rec.gia
                 rec.xe.loi = rec.xe.gia_ban - rec.xe.gia_mua
+                rec.xe.ban_cho = rec.nguoi_mua
 
     def unconfirm_don(self):
         for rec in self:
@@ -138,3 +170,4 @@ class Banxe(models.Model):
                 rec.xe.don_ban = False
                 rec.xe.gia_ban = 0
                 rec.xe.loi = rec.xe.gia_ban - rec.xe.gia_mua
+                rec.xe.ban_cho = False

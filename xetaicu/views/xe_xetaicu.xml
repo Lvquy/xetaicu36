@@ -8,6 +8,10 @@
                 <form string="Xe tải">
                     <header>
                         <field name="status" widget="statusbar"/>
+                        <button name="change_status_0" type="object" string="Mới tạo" attrs="{'invisible':[('status', '=', '0')]}"/>
+                        <button name="change_status_kho" type="object" string="Trong kho" attrs="{'invisible':[('status', '=', 'kho')]}"/>
+                        <button name="change_status_ban" type="object" string="Đã bán" attrs="{'invisible':[('status', '=', 'ban')]}"/>
+
                     </header>
                     <sheet>
                         <field name="img_xe" widget='image' class="oe_avatar"/>
@@ -19,16 +23,29 @@
                                 <field name="bien_ks" placeholder="Biển số xe" required="True"/>
                             </h4>
                             <h4>
-                                <field name="hang_xe"  required="True"/>
+                                <field name="hang_xe" required="True"/>
                             </h4>
                         </div>
                         <group>
                             <field name="ngay_mua"/>
+                            <field name="mua_tu"/>
                             <field name="don_mua"/>
                             <field name="gia_mua"/>
+
                         </group>
                         <group>
+                            <label for="dang_ban"/>
+                            <div class="o_row">
+                                <field name="dang_ban" class="font-weight-bold"/>
+                                <button type="object" name="change_dang_ban" class="btn btn-primary mb4 fa fa-globe"
+                                        aria-label="Đăng bán trên web"
+                                        title="Đăng bán trên web"
+                                />
+                                <span>Đăng /Hủy đăng</span>
+                            </div>
+                            <field name="gia_dang_ban"/>
                             <field name="ngay_ban"/>
+                            <field name="ban_cho"/>
                             <field name="don_ban"/>
                             <field name="gia_ban"/>
                             <field name="loi"/>
@@ -50,8 +67,27 @@
                                     <field name="img_xe_4" widget="image" style="width:400px"/>
                                 </group>
                             </page>
+                            <page name="info" string="Thông tin xe">
+                                <group>
+                                    <group>
+                                        <field name="mau_son"/>
+                                        <field name="nam_sx"/>
+                                        <field name="kich_thuoc"/>
+                                        <field name="tai_trong"/>
+                                    </group>
+                                    <group>
+                                        <field name="xem_xe_tai"/>
+                                        <field name="ten_dong_co"/>
+                                        <field name="dung_tich"/>
+                                        <field name="dang_kiem_toi"/>
+                                    </group>
+                                    <span>Nội dung trên website</span>
+                                    <field name="sale_content"/>
+                                </group>
+
+                            </page>
                         </notebook>
-                        <span>Ghi chú</span>
+                        <span>Ghi chú nội bộ</span>
                         <field name="note"/>
                     </sheet>
                 </form>
@@ -65,8 +101,7 @@
                 <tree string="Xe tải">
                     <field name="name"/>
                     <field name="bien_ks"/>
-                    <field name="dang_ky"/>
-                    <field name="dang_kiem"/>
+                    <field name="status"/>
                 </tree>
             </field>
         </record>
@@ -83,7 +118,7 @@
             </field>
         </record>
 
-        <menuitem id="menu_xe" name="Xe" sequence="2"
+        <menuitem id="menu_xe" name="Xe" sequence="1"
                   web_icon="xetaicu,static/img/xetai.png"
                   groups="base.group_user"/>
         <menuitem id="menu_sub_xe_xetaicu" name="Danh sách xe" parent="menu_xe" action="action_view_xe_xetaicu"
