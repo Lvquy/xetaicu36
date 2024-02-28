@@ -16,6 +16,10 @@
                 <field name="gia_mua"/>
                 <field name="gia_ban"/>
                 <field name="loi"/>
+                <field name="dang_ban"/>
+                <filter string="Xe trong kho" name="xe_trong_kho" domain="[('status','=','kho')]"/>
+                <filter string="Xe đã bán" name="da_ban" domain="[('status','=','ban')]"/>
+                <filter string="Xe đang rao bán" name="dang_rao" domain="[('dang_ban','=',True)]"/>
                 <group expand="0" string="Group By">
                     <filter string="Hãng xe" name="hang_xe" domain="[]" context="{'group_by': 'hang_xe'}"/>
                     <filter string="Ngày mua" name="ngay_mua" domain="[]" context="{'group_by': 'ngay_mua'}"/>
@@ -48,6 +52,8 @@
                 <field name="status"/>
                 <field name="ngay_mua"/>
                 <field name="nguoi_ban"/>
+                <filter string="Đơn đã mua" name="da_mua" domain="[('status','=','1')]"/>
+                <filter string="Đơn nháp" name="don_nhap" domain="[('status','=','0')]"/>
                 <group expand="0" string="Group By">
                     <filter string="Ngày mua" name="ngay_mua" domain="[]" context="{'group_by': 'ngay_mua'}"/>
                 </group>
@@ -65,6 +71,8 @@
                 <field name="status"/>
                 <field name="ngay_ban"/>
                 <field name="nguoi_mua"/>
+                <filter string="Đơn đã bán" name="da_ban" domain="[('status','=','1')]"/>
+                <filter string="Đơn nháp" name="don_mua_nhap" domain="[('status','=','0')]"/>
                 <group expand="0" string="Group By">
                     <filter string="Ngày bán" name="ngay_ban" domain="[]" context="{'group_by': 'ngay_ban'}"/>
                 </group>

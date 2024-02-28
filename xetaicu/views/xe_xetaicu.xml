@@ -98,7 +98,10 @@
             <field name="name">xe.xetaicu.tree</field>
             <field name="model">xe.xetaicu</field>
             <field name="arch" type="xml">
-                <tree string="Xe tải">
+                <tree string="Xe tải"
+                      decoration-success="status == 'ban'"
+                      decoration-muted="status == '0'"
+                      decoration-danger="status == 'kho'">
                     <field name="name"/>
                     <field name="bien_ks"/>
                     <field name="status"/>

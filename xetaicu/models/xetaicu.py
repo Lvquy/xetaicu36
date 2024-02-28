@@ -160,6 +160,7 @@ class Banxe(models.Model):
                 rec.xe.gia_ban = rec.gia
                 rec.xe.loi = rec.xe.gia_ban - rec.xe.gia_mua
                 rec.xe.ban_cho = rec.nguoi_mua
+                rec.xe.dang_ban = False
 
     def unconfirm_don(self):
         for rec in self:
