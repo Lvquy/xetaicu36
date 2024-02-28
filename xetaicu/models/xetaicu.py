@@ -31,7 +31,7 @@ class Xetai(models.Model):
         ('da', 'DAEWOO'),
         ('th', 'THACO'),
         ('ja', 'JAC'),
-        ('tm', 'TMT CỬU LONG')],
+        ('tm', 'TMT CỬU LONG')], default='0',
         string='Hãng xe')
     img_xe = fields.Image(string='Hình xe')
     img_xe_1 = fields.Image(string='Hình xe 1')
