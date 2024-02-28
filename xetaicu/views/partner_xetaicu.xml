@@ -26,6 +26,18 @@
                         </group>
                         <span>Ghi chú</span>
                         <field name="note"/>
+                        <notebook>
+                            <page name="log_muaban" string="Lịch sử mua bán">
+                                <field name="log_muaban">
+                                    <tree>
+                                        <field name="name"/>
+                                        <field name="ngay_giao_dich"/>
+                                        <field name="chung_tu_mua"/>
+                                        <field name="chung_tu_ban"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
                     </sheet>
                 </form>
             </field>

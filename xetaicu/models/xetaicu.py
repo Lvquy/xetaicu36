@@ -15,13 +15,25 @@ class KhachHang(models.Model):
     img_can_cuoc_b = fields.Image(string='Ảnh căn cước sau')
     img_giay_ket_hon = fields.Image(string='Giấy kết hôn')
     note = fields.Text(string='Ghi chú')
+    log_muaban = fields.One2many('log.muaban','ref_partner', string='Lịch sử mua bán')
+
+class Logmuaban(models.Model):
+    _name = 'log.muaban'
+    _description = 'Lịch sử mua bán'
+    _rec_name = 'name'
+
+    name = fields.Char(string='Loại giao dịch')
+    ngay_giao_dich = fields.Date(string='Ngày giao dịch')
+    chung_tu_mua = fields.Many2one('muaxe.xetaicu', string='Chứng từ mua')
+    chung_tu_ban = fields.Many2one('banxe.xetaicu', string='Chứng từ bán')
+    ref_partner = fields.Many2one('partner.xetaicu',string='Khách hàng')
 
 
 class Xetai(models.Model):
     _name = 'xe.xetaicu'
     _description = 'Xe tai cu'
 
-    dang_ban = fields.Boolean(string='Đăng bán trên web', default=False)
+    dang_ban = fields.Boolean(string='Đăng bán trên web', default=False, readonly=True)
     name = fields.Char(string='Tên xe')
     mau_son = fields.Char(string='Màu sơn')
     nam_sx = fields.Integer(string='Năm sản xuất')
@@ -114,6 +126,11 @@ class Muaxe(models.Model):
     def confirm_don(self):
         for rec in self:
             rec.status = '1'
+            rec.nguoi_ban.log_muaban = [(0,0,{
+                'name':'Khách bán xe - '+ str(rec.xe.bien_ks),
+                'ngay_giao_dich':rec.ngay_mua,
+                'chung_tu_mua':rec.id,
+            })]
             if rec.xe:
                 rec.xe.status = 'kho'
                 rec.xe.ngay_mua = rec.ngay_mua
@@ -152,6 +169,11 @@ class Banxe(models.Model):
     def confirm_don(self):
         for rec in self:
             rec.status = '1'
+            rec.nguoi_mua.log_muaban = [(0, 0, {
+                'name': 'Khách mua xe - ' + str(rec.xe.bien_ks),
+                'ngay_giao_dich': rec.ngay_ban,
+                'chung_tu_ban': rec.id,
+            })]
             if rec.xe:
 
                 rec.xe.status = 'ban'
