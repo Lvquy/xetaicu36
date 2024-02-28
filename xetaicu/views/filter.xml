@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!--search xe.xetaicu -->
+    <record id="view_search_xe" model="ir.ui.view">
+        <field name="name">xe.xetaicu.search</field>
+        <field name="model">xe.xetaicu</field>
+        <field name="priority" eval="1"/>
+        <field name="arch" type="xml">
+            <search string="Search xe">
+                <field name="bien_ks"/>
+                <field name="name"/>
+                <field name="hang_xe"/>
+                <field name="status"/>
+                <field name="ngay_mua"/>
+                <field name="ngay_ban"/>
+                <field name="gia_mua"/>
+                <field name="gia_ban"/>
+                <field name="loi"/>
+                <group expand="0" string="Group By">
+                    <filter string="Hãng xe" name="hang_xe" domain="[]" context="{'group_by': 'hang_xe'}"/>
+                    <filter string="Ngày mua" name="ngay_mua" domain="[]" context="{'group_by': 'ngay_mua'}"/>
+                    <filter string="Ngày bán" name="ngay_ban" domain="[]" context="{'group_by': 'ngay_ban'}"/>
+                    <filter string="Trạng thái xe" name="status" domain="[]" context="{'group_by': 'status'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="view_partner" model="ir.ui.view">
+        <field name="name">partner.xetaicu.search</field>
+        <field name="model">partner.xetaicu</field>
+        <field name="priority" eval="1"/>
+        <field name="arch" type="xml">
+            <search string="Search khach">
+                <field name="name"/>
+                <field name="phone"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="view_muaxe" model="ir.ui.view">
+        <field name="name">muaxe.xetaicu.search</field>
+        <field name="model">muaxe.xetaicu</field>
+        <field name="priority" eval="1"/>
+        <field name="arch" type="xml">
+            <search string="Search xe">
+                <field name="name"/>
+                <field name="status"/>
+                <field name="ngay_mua"/>
+                <field name="nguoi_ban"/>
+                <group expand="0" string="Group By">
+                    <filter string="Ngày mua" name="ngay_mua" domain="[]" context="{'group_by': 'ngay_mua'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="view_banxe" model="ir.ui.view">
+        <field name="name">banxe.xetaicu.search</field>
+        <field name="model">banxe.xetaicu</field>
+        <field name="priority" eval="1"/>
+        <field name="arch" type="xml">
+            <search string="Search ban xe">
+                <field name="name"/>
+                <field name="status"/>
+                <field name="ngay_ban"/>
+                <field name="nguoi_mua"/>
+                <group expand="0" string="Group By">
+                    <filter string="Ngày bán" name="ngay_ban" domain="[]" context="{'group_by': 'ngay_ban'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+</odoo>

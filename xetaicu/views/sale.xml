@@ -8,8 +8,8 @@
                 <form string="Đơn bán xe">
                     <header>
                         <field widget="statusbar" name="status"/>
-                        <button name="confirm_don" type="object" string="Xác nhận"/>
-                        <button name="unconfirm_don" type="object" string="Hủy xác nhận"/>
+                        <button name="confirm_don" type="object" string="Xác nhận"  class="btn btn-primary" attrs="{'invisible':[('status', '=', '1')]}"/>
+                        <button name="unconfirm_don" type="object" string="Hủy xác nhận"  class="btn" attrs="{'invisible':[('status', '=', '0')]}"/>
                     </header>
                     <sheet>
                         <div class="oe_title">
@@ -22,7 +22,8 @@
                             <field name="nguoi_mua"/>
                         </group>
                         <group>
-                            <field name="xe"/>
+                            <field name="xe" domain="[('status','=','kho')]" options="{'no_open': False, 'no_create': True , 'no_quick_create': True}"/>
+                            <field name="gia"/>
                         </group>
                         <notebook>
                             <page name="thongtin" string="Thông tin">

@@ -17,6 +17,7 @@
         'views/purchase.xml',
         'views/sale.xml',
         'views/xe_xetaicu.xml',
+        'views/filter.xml',
 
     ],
 

@@ -18,14 +18,20 @@
                             <h4>
                                 <field name="bien_ks" placeholder="Biển số xe" required="True"/>
                             </h4>
+                            <h4>
+                                <field name="hang_xe"  required="True"/>
+                            </h4>
                         </div>
                         <group>
                             <field name="ngay_mua"/>
                             <field name="don_mua"/>
+                            <field name="gia_mua"/>
                         </group>
                         <group>
                             <field name="ngay_ban"/>
                             <field name="don_ban"/>
+                            <field name="gia_ban"/>
+                            <field name="loi"/>
                         </group>
                         <notebook>
                             <page string="Đăng ký đăng kiểm" name="dkdk">
