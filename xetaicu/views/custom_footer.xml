@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="xetaicu.brand_promotion" inherit_id="website.brand_promotion" name="rm brand promotion mes" customize_show="True">
+        <xpath expr="//t[@t-call='web.brand_promotion_message']" position="replace">
+
+        </xpath>
+    </template>
+    <template inherit_id="website.layout" id="rm_footer_default" customize_show="True" name="Remove Footer">
+        <xpath expr="//div[@id='footer']" position="replace">
+
+        </xpath>
+    </template>
+</odoo>

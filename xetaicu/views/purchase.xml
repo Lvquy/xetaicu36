@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="muaxe_xetaicu_form" model="ir.ui.view">
+            <field name="name">muaxe.xetaicu.form</field>
+            <field name="model">muaxe.xetaicu</field>
+            <field name="arch" type="xml">
+                <form string="Đơn mua xe">
+                    <header>
+                        <field widget="statusbar" name="status"/>
+                        <button name="confirm_don" type="object" string="Xác nhận"/>
+                        <button name="unconfirm_don" type="object" string="Hủy xác nhận"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" placeholder="Tên đơn mua"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="ngay_mua"/>
+                            </group>
+                            <group>
+                                <field name="nguoi_ban"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="xe"/>
+                        </group>
+                        <notebook>
+                            <page name="thongtin" string="Thông tin">
+                                <group>
+                                    <field name="giay_mua_ban_img" widget="image" style="width:400px"/>
+                                    <field name="giay_mua_ban_congchung_img" widget="image" style="width:400px"/>
+                                </group>
+                            </page>
+                        </notebook>
+                        <span>Ghi chú</span>
+                        <field name="note"/>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="muaxe_xetaicu_tree" model="ir.ui.view">
+            <field name="name">muaxe.xetaicu.tree</field>
+            <field name="model">muaxe.xetaicu</field>
+            <field name="arch" type="xml">
+                <tree string="Danh sách">
+                    <field name="ngay_mua" optional="show"/>
+                    <field name="nguoi_ban" optional="show"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- action view-->
+        <record id="action_view_muaxe" model="ir.actions.act_window">
+            <field name="name">Mua xe</field>
+            <field name="res_model">muaxe.xetaicu</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new ...
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_muaxe" name="Mua xe" sequence="3"
+                  web_icon="xetaicu,static/img/purchase.png"
+                  groups="base.group_user"/>
+        <menuitem id="menu_sub_muaxe" name="Danh sách đơn mua" parent="menu_muaxe" action="action_view_muaxe"
+                  sequence="1" groups="base.group_user"/>
+    </data>
+</odoo>
+

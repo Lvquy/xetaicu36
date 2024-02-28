@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="xe_xetaicu_form" model="ir.ui.view">
+            <field name="name">xe.xetaicu.form</field>
+            <field name="model">xe.xetaicu</field>
+            <field name="arch" type="xml">
+                <form string="Xe tải">
+                    <header>
+                        <field name="status" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <field name="img_xe" widget='image' class="oe_avatar"/>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" placeholder="Tên" required="True"/>
+                            </h1>
+                            <h4>
+                                <field name="bien_ks" placeholder="Biển số xe" required="True"/>
+                            </h4>
+                        </div>
+                        <group>
+                            <field name="ngay_mua"/>
+                            <field name="don_mua"/>
+                        </group>
+                        <group>
+                            <field name="ngay_ban"/>
+                            <field name="don_ban"/>
+                        </group>
+                        <notebook>
+                            <page string="Đăng ký đăng kiểm" name="dkdk">
+                                <group>
+                                    <field name="dang_ky" widget="image" style="width:400px"/>
+                                    <field name="dang_kiem" widget="image" style="width:400px"/>
+                                </group>
+                            </page>
+                            <page name="anhxe" string="Ảnh xe">
+                                <group>
+                                    <field name="img_xe_1" widget="image" style="width:400px"/>
+                                    <field name="img_xe_2" widget="image" style="width:400px"/>
+                                </group>
+                                <group>
+                                    <field name="img_xe_3" widget="image" style="width:400px"/>
+                                    <field name="img_xe_4" widget="image" style="width:400px"/>
+                                </group>
+                            </page>
+                        </notebook>
+                        <span>Ghi chú</span>
+                        <field name="note"/>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="xe_xetaicu_tree" model="ir.ui.view">
+            <field name="name">xe.xetaicu.tree</field>
+            <field name="model">xe.xetaicu</field>
+            <field name="arch" type="xml">
+                <tree string="Xe tải">
+                    <field name="name"/>
+                    <field name="bien_ks"/>
+                    <field name="dang_ky"/>
+                    <field name="dang_kiem"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- action view-->
+        <record id="action_view_xe_xetaicu" model="ir.actions.act_window">
+            <field name="name">Xe</field>
+            <field name="res_model">xe.xetaicu</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new ...
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_xe" name="Xe" sequence="2"
+                  web_icon="xetaicu,static/img/xetai.png"
+                  groups="base.group_user"/>
+        <menuitem id="menu_sub_xe_xetaicu" name="Danh sách xe" parent="menu_xe" action="action_view_xe_xetaicu"
+                  sequence="2" groups="base.group_user"/>
+    </data>
+</odoo>
+

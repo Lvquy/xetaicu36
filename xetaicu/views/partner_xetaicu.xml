@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="partner_xetaicu_form" model="ir.ui.view">
+            <field name="name">partner.xetaicu.form</field>
+            <field name="model">partner.xetaicu</field>
+            <field name="arch" type="xml">
+                <form string="Khách hàng">
+                    <sheet>
+                        <field name="img_avatar" widget='image' class="oe_avatar"/>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" placeholder="Tên" required="True" class="red-color"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="add"/>
+                                <field name="phone"/>
+                            </group>
+                        </group>
+                        <group name="thongtin" string="Thông tin">
+                            <field name="img_can_cuoc_f" widget="image" style="width:400px;"/>
+                            <field name="img_can_cuoc_b" widget="image" style="width:400px;"/>
+                            <field name="img_giay_ket_hon" widget="image" style="width:400px;"/>
+                        </group>
+                        <span>Ghi chú</span>
+                        <field name="note"/>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="partner_xetaicu_tree" model="ir.ui.view">
+            <field name="name">partner.xetaicu.tree</field>
+            <field name="model">partner.xetaicu</field>
+            <field name="arch" type="xml">
+                <tree string="Danh sách khách hàng">
+                    <field name="name" optional="show"/>
+                    <field name="add" optional="show"/>
+                    <field name="phone" optional="show"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- action view-->
+        <record id="action_view_partner" model="ir.actions.act_window">
+            <field name="name">Khách hàng</field>
+            <field name="res_model">partner.xetaicu</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new ...
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_partner" name="Khách hàng" sequence="1"
+                  web_icon="xetaicu,static/img/partner.png"
+                  groups="base.group_user"/>
+        <menuitem id="menu_sub_partner" name="Danh sách khách hàng" parent="menu_partner" action="action_view_partner"
+                  sequence="1" groups="base.group_user"/>
+    </data>
+</odoo>
+

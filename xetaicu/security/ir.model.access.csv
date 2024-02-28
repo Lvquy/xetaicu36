@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+
+partner_xetaicu_root,partner.xetaicu.root,model_partner_xetaicu,base.group_user,1,1,1,1
+xe_xetaicu_root,xe.xetaicu.root,model_xe_xetaicu,base.group_user,1,1,1,1
+muaxe_xetaicu_root,muaxe.xetaicu.root,model_muaxe_xetaicu,base.group_user,1,1,1,1
+banxe_xetaicu_root,banxe.xetaicu.root,model_banxe_xetaicu,base.group_user,1,1,1,1

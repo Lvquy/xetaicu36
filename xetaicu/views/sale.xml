@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="banxe_xetaicu_form" model="ir.ui.view">
+            <field name="name">banxe.xetaicu.form</field>
+            <field name="model">banxe.xetaicu</field>
+            <field name="arch" type="xml">
+                <form string="Đơn bán xe">
+                    <header>
+                        <field widget="statusbar" name="status"/>
+                        <button name="confirm_don" type="object" string="Xác nhận"/>
+                        <button name="unconfirm_don" type="object" string="Hủy xác nhận"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" placeholder="Tên đơn bán"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <field name="ngay_ban"/>
+                            <field name="nguoi_mua"/>
+                        </group>
+                        <group>
+                            <field name="xe"/>
+                        </group>
+                        <notebook>
+                            <page name="thongtin" string="Thông tin">
+                                <group>
+                                    <field name="giay_mua_ban_img" widget="image"/>
+                                    <field name="giay_mua_ban_congchung_img" widget="image"/>
+                                </group>
+                            </page>
+                        </notebook>
+                        <span>Ghi chú</span>
+                        <field name="note"/>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="banxe_xetaicu_tree" model="ir.ui.view">
+            <field name="name">banxe.xetaicu.tree</field>
+            <field name="model">banxe.xetaicu</field>
+            <field name="arch" type="xml">
+                <tree string="Danh sách">
+                    <field name="ngay_ban" optional="show"/>
+                    <field name="nguoi_mua" optional="show"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- action view-->
+        <record id="action_view_banxe" model="ir.actions.act_window">
+            <field name="name">Bán xe</field>
+            <field name="res_model">banxe.xetaicu</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new ...
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_banxe" name="Bán xe" sequence="4"
+                  web_icon="xetaicu,static/img/sale.png"
+                  groups="base.group_user"/>
+        <menuitem id="menu_sub_ban" name="Danh sách đơn bán" parent="menu_banxe" action="action_view_banxe"
+                  sequence="1" groups="base.group_user"/>
+    </data>
+</odoo>
+
