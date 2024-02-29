@@ -8,8 +8,10 @@
                 <form string="Đơn bán xe">
                     <header>
                         <field widget="statusbar" name="status"/>
-                        <button name="confirm_don" type="object" string="Xác nhận"  class="btn btn-primary" attrs="{'invisible':[('status', '=', '1')]}"/>
-                        <button name="unconfirm_don" type="object" string="Hủy xác nhận"  class="btn" attrs="{'invisible':[('status', '=', '0')]}"/>
+                        <button name="confirm_don" type="object" string="Xác nhận" class="btn btn-primary"
+                                attrs="{'invisible':[('status', '=', '1')]}"/>
+                        <button name="unconfirm_don" type="object" string="Hủy xác nhận" class="btn"
+                                attrs="{'invisible':[('status', '=', '0')]}"/>
                     </header>
                     <sheet>
                         <div class="oe_title">
@@ -18,12 +20,16 @@
                             </h1>
                         </div>
                         <group>
-                            <field name="ngay_ban"/>
-                            <field name="nguoi_mua"/>
-                        </group>
-                        <group>
-                            <field name="xe" domain="[('status','=','kho')]" options="{'no_open': False, 'no_create': True , 'no_quick_create': True}"/>
-                            <field name="gia"/>
+                            <group>
+                                <field name="ngay_ban"/>
+                                <field name="nguoi_mua"/>
+                            </group>
+                            <group>
+                                <field name="xe" domain="[('status','=','kho')]"
+                                       options="{'no_open': False, 'no_create': True , 'no_quick_create': True}"/>
+                                <field name="gia"/>
+                                <field name="note"/>
+                            </group>
                         </group>
                         <notebook>
                             <page name="thongtin" string="Thông tin">
@@ -33,8 +39,6 @@
                                 </group>
                             </page>
                         </notebook>
-                        <span>Ghi chú</span>
-                        <field name="note"/>
                     </sheet>
                 </form>
             </field>
