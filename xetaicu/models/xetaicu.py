@@ -15,18 +15,18 @@ class KhachHang(models.Model):
     img_can_cuoc_b = fields.Image(string='Ảnh căn cước sau')
     img_giay_ket_hon = fields.Image(string='Giấy kết hôn')
     note = fields.Text(string='Ghi chú')
-    log_muaban = fields.One2many('log.muaban','ref_partner', string='Lịch sử mua bán')
+    log_muaban = fields.One2many('log.muaban','ref_partner', string='Lịch sử mua bán', readonly=True)
 
 class Logmuaban(models.Model):
     _name = 'log.muaban'
     _description = 'Lịch sử mua bán'
     _rec_name = 'name'
 
-    name = fields.Char(string='Loại giao dịch')
-    ngay_giao_dich = fields.Date(string='Ngày giao dịch')
-    chung_tu_mua = fields.Many2one('muaxe.xetaicu', string='Chứng từ mua')
-    chung_tu_ban = fields.Many2one('banxe.xetaicu', string='Chứng từ bán')
-    ref_partner = fields.Many2one('partner.xetaicu',string='Khách hàng')
+    name = fields.Char(string='Loại giao dịch', readonly=True)
+    ngay_giao_dich = fields.Date(string='Ngày giao dịch', readonly=True)
+    chung_tu_mua = fields.Many2one('muaxe.xetaicu', string='Chứng từ mua', readonly=True)
+    chung_tu_ban = fields.Many2one('banxe.xetaicu', string='Chứng từ bán', readonly=True)
+    ref_partner = fields.Many2one('partner.xetaicu',string='Khách hàng', readonly=True)
 
 
 class Xetai(models.Model):
@@ -66,16 +66,16 @@ class Xetai(models.Model):
     status = fields.Selection([('0', 'Mới tạo'), ('kho', 'Trong kho'), ('ban', 'Đã bán')], default='0',
                               string='Tình trạng xe')
     note = fields.Text(string='Ghi chú nội bộ')
-    ngay_mua = fields.Date(string='Ngày mua')
-    ngay_ban = fields.Date(string='Ngày bán')
-    don_mua = fields.Many2one('muaxe.xetaicu', string='Đơn mua')
-    gia_mua = fields.Integer(string='Giá mua')
-    don_ban = fields.Many2one('banxe.xetaicu', string='Đơn bán')
-    gia_ban = fields.Integer(string='Giá bán')
-    loi = fields.Integer(string='Lời')
+    ngay_mua = fields.Date(string='Ngày mua', readonly=True)
+    ngay_ban = fields.Date(string='Ngày bán', readonly=True)
+    don_mua = fields.Many2one('muaxe.xetaicu', string='Đơn mua', readonly=True)
+    gia_mua = fields.Integer(string='Giá mua', readonly=True)
+    don_ban = fields.Many2one('banxe.xetaicu', string='Đơn bán', readonly=True)
+    gia_ban = fields.Integer(string='Giá bán', readonly=True)
+    loi = fields.Integer(string='Lời', readonly=True)
     gia_dang_ban = fields.Char(string='Giá đăng bán trên website')
-    mua_tu = fields.Many2one('partner.xetaicu', string='Mua từ đâu')
-    ban_cho = fields.Many2one('partner.xetaicu', string='Bán cho ai')
+    mua_tu = fields.Many2one('partner.xetaicu', string='Mua từ đâu', readonly=True)
+    ban_cho = fields.Many2one('partner.xetaicu', string='Bán cho ai', readonly=True)
 
     def change_dang_ban(self):
         for rec in self:
