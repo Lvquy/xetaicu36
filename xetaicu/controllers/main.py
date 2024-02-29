@@ -20,16 +20,20 @@ class Book(http.Controller):
         pager = request.website.pager(url='/list_xe', total=total_xe, page=page, step=per_page, scope=3,
                                       url_args=None)
         XE = XETAI.search(domain, limit=per_page, offset=pager['offset'])
+        company = request.env['res.company'].sudo().search([],limit=1)
         values = {
             'XETAI': XE,
             'pager': pager,
-            'breadcrumb': breadcrumb
+            'breadcrumb': breadcrumb,
+            'company':company
         }
         return request.render('xetaicu.list_xe', values)
 
     @http.route(['/list_xe/details/<model("xe.xetaicu"):xe>'], auth='public', website=True, csrf=False)
     def xetai(self, xe):
+        company = request.env['res.company'].sudo().search([], limit=1)
         values = {
             'xe': xe,
+            'company': company
         }
         return request.render('xetaicu.xe_details', values)

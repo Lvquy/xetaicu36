@@ -9,7 +9,6 @@
         </record>
     </data>
 
-
     <template id="list_xe">
         <t t-call="website.layout">
             <t t-set="title">Xe đang bán</t>
@@ -31,61 +30,29 @@
                               class="s_website_form form-horizontal container-fluid mt32 mb-2">
                         </form>
                     </div>
-                    <div class="row">
+                    <div class="row pd-2 mr-2">
                         <t t-foreach="XETAI" t-as="s">
-                            <div class="col-4 text-center">
-                                <table class="table table-bordered">
-                                    <tr>
-                                        <td style="border-right-width:0px;">
-                                            <a t-att-href="'/list_xe/details/%s' %slug(s)" intemprop="url"
-                                               target="">
-                                                <img t-att-src="'/web/image/xe.xetaicu/%s/img_xe' % s.id" alt="img"
-                                                     style="width:100px"/>
-                                            </a>
-                                        </td>
-                                        <td class="text-left" style="border-left-width:0px;">
-                                            <t t-esc="s.name"/>
-                                            <br/>
-                                            <t t-esc="s.bien_ks"/>
-                                            <br/>
-                                            <t t-if="s.hang_xe != '0'">
-                                                <t t-if="s.hang_xe == 'hn'">
-                                                    HINO
-                                                </t>
+                            <div class="col-4 mb-3 text-center">
 
-                                                <t t-if="s.hang_xe == 'is'">
-                                                    ISUZU
-                                                </t>
-
-                                                <t t-if="s.hang_xe == 'hd'">
-                                                    HYNDAI
-                                                </t>
-
-                                                <t t-if="s.hang_xe == 'fu'">
-                                                    FUSO
-                                                </t>
-
-                                                <t t-if="s.hang_xe == 'da'">
-                                                    DAEWOO
-                                                </t>
-
-                                                <t t-if="s.hang_xe == 'th'">
-                                                    THACO
-                                                </t>
-
-                                                <t t-if="s.hang_xe == 'ja'">
-                                                    JAC
-                                                </t>
-                                                <t t-if="s.hang_xe == 'tm'">
-                                                    TMT CỬU LONG
-                                                </t>
-                                            </t>
-                                            <br/>
-                                            <t t-esc="s.gia_dang_ban"/>
-                                        </td>
-                                    </tr>
-                                </table>
+                                <a t-att-href="'/list_xe/details/%s' %slug(s)" intemprop="url"
+                                   target="">
+                                    <img t-att-src="'/web/image/xe.xetaicu/%s/img_xe' % s.id" alt="img"
+                                         style="width:250px"/>
+                                </a>
                             </div>
+                            <div class="col-8 mb-3 text-left">
+                                <t t-esc="s.name"/>
+                                <br/>
+                                <t t-esc="s.bien_ks"/>
+                                <br/>
+                                <t t-esc="s.xem_xe_tai"/>
+                                <br/>
+                                <t t-esc="s.gia_dang_ban"/>
+                                <br/>
+                                <t t-set="mobile" t-value="company.mobile"/>
+                                <a t-att-href="'tel:'+mobile" class="btn btn-sm btn-primary">Gọi ngay</a>
+                            </div>
+                            <hr class="col-12"/>
                         </t>
                         <div class="col-12 product_pager form-inline justify-content-center mt-3 mb-3">
                             <t t-call="website.pager"/>
@@ -223,6 +190,13 @@
                                 <td>Giá</td>
                                 <td>
                                     <t t-esc="xe.sudo().gia_dang_ban"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Liên hệ</td>
+                                <td>
+                                    <t t-set="mobile" t-value="company.mobile"/>
+                                    <a t-att-href="'tel:'+mobile" class="btn btn-sm btn-primary">Gọi ngay</a>
                                 </td>
                             </tr>
                         </table>
