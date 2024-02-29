@@ -136,6 +136,15 @@
                                     <t t-if="xe.sudo().hang_xe == 'tm'">
                                         TMT CỬU LONG
                                     </t>
+                                    <t t-if="xe.sudo().hang_xe == 'db'">
+                                        DONGBEN
+                                    </t>
+                                    <t t-if="xe.sudo().hang_xe == 'ka'">
+                                        KIA
+                                    </t>
+                                    <t t-if="xe.sudo().hang_xe == 'bg'">
+                                        BONGO
+                                    </t>
                                 </td>
                             </tr>
                             <tr>
