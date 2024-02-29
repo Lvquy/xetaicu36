@@ -8,9 +8,12 @@
                 <form string="Xe tải">
                     <header>
                         <field name="status" widget="statusbar"/>
-                        <button name="change_status_0" type="object" string="Mới tạo" attrs="{'invisible':[('status', '=', '0')]}"/>
-                        <button name="change_status_kho" type="object" string="Trong kho" attrs="{'invisible':[('status', '=', 'kho')]}"/>
-                        <button name="change_status_ban" type="object" string="Đã bán" attrs="{'invisible':[('status', '=', 'ban')]}"/>
+                        <button name="change_status_0" type="object" string="Mới tạo"
+                                attrs="{'invisible':[('status', '=', '0')]}"/>
+                        <button name="change_status_kho" type="object" string="Trong kho"
+                                attrs="{'invisible':[('status', '=', 'kho')]}"/>
+                        <button name="change_status_ban" type="object" string="Đã bán"
+                                attrs="{'invisible':[('status', '=', 'ban')]}"/>
 
                     </header>
                     <sheet>
@@ -48,6 +51,7 @@
                             <field name="ban_cho"/>
                             <field name="don_ban"/>
                             <field name="gia_ban"/>
+                            <field name="chiphi_suachua"/>
                             <field name="loi"/>
                         </group>
                         <notebook>
@@ -104,6 +108,14 @@
                       decoration-danger="status == 'kho'">
                     <field name="name"/>
                     <field name="bien_ks"/>
+                    <field name="ngay_mua"/>
+                    <field name="gia_mua"/>
+                    <field name="chiphi_suachua"/>
+                    <field name="gia_dang_ban"/>
+                    <field name="ngay_ban"/>
+                    <field name="gia_ban"/>
+                    <field name="chiphi_suachua"/>
+                    <field name="loi"/>
                     <field name="status"/>
                 </tree>
             </field>
