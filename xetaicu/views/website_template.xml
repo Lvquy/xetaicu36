@@ -11,6 +11,7 @@
 
     <template id="list_xe">
         <t t-call="website.layout">
+            <div id="wrap" class="oe_structure oe_empty"/>
             <t t-set="title">Xe đang bán</t>
             <div class="oe_structure">
                 <div class="container">
@@ -41,16 +42,46 @@
                                 </a>
                             </div>
                             <div class="col-8 mb-3 text-left">
-                                <t t-esc="s.name"/>
+                                <h4>
+                                    Tên xe:
+                                    <a t-att-href="'/list_xe/details/%s' %slug(s)" intemprop="url"
+                                       target="">
+                                        <t t-esc="s.name"/>
+                                    </a>
+                                </h4>
                                 <br/>
+                                <strong>
+                                    Biển số:
+                                </strong>
                                 <t t-esc="s.bien_ks"/>
                                 <br/>
+                                <strong>
+                                    Tải trọng:
+                                </strong>
+                                <t t-esc="s.tai_trong"/>
+                                <br/>
+                                <strong>
+                                    Năm sản xuất:
+                                </strong>
+                                <t t-esc="s.nam_sx"/>
+                                <br/>
+                                <strong>
+                                    Xem xe tại:
+                                </strong>
                                 <t t-esc="s.xem_xe_tai"/>
                                 <br/>
+                                <strong>
+                                    Giá bán:
+                                </strong>
                                 <t t-esc="s.gia_dang_ban"/>
                                 <br/>
+                                <br/>
+                                <br/>
+                                <strong class="text-danger">
+                                    Gọi / Zalo:
+                                </strong>
                                 <t t-set="mobile" t-value="company.mobile"/>
-                                <a t-att-href="'tel:'+mobile" class="btn btn-sm btn-primary">Gọi ngay</a>
+                                <a t-att-href="'tel:'+mobile" class="btn btn-sm btn-danger">Gọi ngay</a>
                             </div>
                             <hr class="col-12"/>
                         </t>
@@ -60,6 +91,7 @@
                     </div>
                 </div>
             </div>
+            <div id="wrap" class="oe_structure oe_empty"/>
         </t>
     </template>
 
@@ -68,9 +100,10 @@
             <t t-set="title">
                 <t t-esc="xe.sudo().name"/>
             </t>
-
+            <div id="wrap" class="oe_structure oe_empty"/>
             <div class="oe_structure">
                 <div class="container">
+
                     <nav aria-label="breadcrumb" class="nav mt-5">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">
@@ -144,6 +177,9 @@
                                     </t>
                                     <t t-if="xe.sudo().hang_xe == 'bg'">
                                         BONGO
+                                    </t>
+                                    <t t-if="xe.sudo().hang_xe == 'su'">
+                                        SUZUKI
                                     </t>
                                 </td>
                             </tr>
@@ -234,13 +270,11 @@
                                 white-space: pre-line;
                                 }
                             </style>
-                            <span class="xuong-dong">
-                                <t t-esc="xe.sudo().sale_content"/>
-                            </span>
                         </div>
                     </div>
                 </div>
             </div>
+            <div id="wrap" class="oe_structure oe_empty"/>
         </t>
     </template>
 </odoo>

@@ -55,6 +55,7 @@ class Xetai(models.Model):
         ('db', 'DONGBEN'),
         ('ka', 'KIA'),
         ('bg', 'BONGO'),
+        ('su', 'SUZUKI'),
         ('tm', 'TMT CỬU LONG')], default='0',
         string='Hãng xe')
     img_xe = fields.Image(string='Hình xe')
@@ -65,7 +66,6 @@ class Xetai(models.Model):
     bien_ks = fields.Char(string='Biển số xe')
     dang_ky = fields.Image(string='Ảnh đăng ký')
     dang_kiem = fields.Image(string='Ảnh đăng kiểm')
-    sale_content = fields.Html(string='Nội dung trên website')
     status = fields.Selection([('0', 'Mới tạo'), ('kho', 'Trong kho'), ('ban', 'Đã bán')], default='0',
                               string='Tình trạng xe')
     note = fields.Text(string='Ghi chú nội bộ')

@@ -85,8 +85,6 @@
                                         <field name="dung_tich"/>
                                         <field name="dang_kiem_toi"/>
                                     </group>
-                                    <span>Nội dung trên website</span>
-                                    <field name="sale_content"/>
                                 </group>
 
                             </page>
