@@ -5,3 +5,4 @@ xe_xetaicu_root,xe.xetaicu.root,model_xe_xetaicu,base.group_user,1,1,1,1
 muaxe_xetaicu_root,muaxe.xetaicu.root,model_muaxe_xetaicu,base.group_user,1,1,1,1
 banxe_xetaicu_root,banxe.xetaicu.root,model_banxe_xetaicu,base.group_user,1,1,1,1
 log_muaban_root,log.muaban_root.root,model_log_muaban,base.group_user,1,1,1,1
+xe_xetaicu_public,xe.xetaicu.public,model_xe_xetaicu,,1,0,0,0
