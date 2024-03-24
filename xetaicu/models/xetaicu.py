@@ -140,7 +140,7 @@ class Muaxe(models.Model):
                 rec.xe.ngay_mua = rec.ngay_mua
                 rec.xe.don_mua = rec.id
                 rec.xe.gia_mua = rec.gia
-                rec.xe.loi = rec.xe.gia_ban - rec.xe.gia_mua - rec.chiphi_suachua
+                rec.xe.loi = rec.xe.gia_ban - rec.xe.gia_mua - rec.xe.chiphi_suachua
                 rec.xe.mua_tu = rec.nguoi_ban
 
     def unconfirm_don(self):
@@ -151,7 +151,7 @@ class Muaxe(models.Model):
                 rec.xe.status = '0'
                 rec.xe.ngay_mua = False
                 rec.xe.don_mua = False
-                rec.xe.loi = rec.xe.gia_ban - rec.xe.gia_mua - rec.chiphi_suachua
+                rec.xe.loi = rec.xe.gia_ban - rec.xe.gia_mua - rec.xe.chiphi_suachua
                 rec.xe.mua_tu = False
 
 
@@ -184,7 +184,7 @@ class Banxe(models.Model):
                 rec.xe.ngay_ban = rec.ngay_ban
                 rec.xe.don_ban = rec.id
                 rec.xe.gia_ban = rec.gia
-                rec.xe.loi = rec.xe.gia_ban - rec.xe.gia_mua - rec.chiphi_suachua
+                rec.xe.loi = rec.xe.gia_ban - rec.xe.gia_mua - rec.xe.chiphi_suachua
                 rec.xe.ban_cho = rec.nguoi_mua
                 rec.xe.dang_ban = False
 
@@ -196,5 +196,5 @@ class Banxe(models.Model):
                 rec.xe.ngay_ban = False
                 rec.xe.don_ban = False
                 rec.xe.gia_ban = 0
-                rec.xe.loi = rec.xe.gia_ban - rec.xe.gia_mua - rec.chiphi_suachua
+                rec.xe.loi = rec.xe.gia_ban - rec.xe.gia_mua - rec.xe.chiphi_suachua
                 rec.xe.ban_cho = False
