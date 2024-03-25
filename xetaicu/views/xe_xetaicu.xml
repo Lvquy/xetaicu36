@@ -51,8 +51,17 @@
                             <field name="ban_cho"/>
                             <field name="don_ban"/>
                             <field name="gia_ban"/>
-                            <field name="chiphi_suachua"/>
+                            <field name="chiphi_suachua_total"/>
                             <field name="loi"/>
+                        </group>
+                        <group>
+                            <field name="chiphi_suachua">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="so_tien"/>
+                                    <field name="ngay_chi"/>
+                                </tree>
+                            </field>
                         </group>
                         <notebook>
                             <page string="Đăng ký đăng kiểm" name="dkdk">
@@ -78,12 +87,15 @@
                                         <field name="nam_sx"/>
                                         <field name="kich_thuoc"/>
                                         <field name="tai_trong"/>
+                                        <field name="xe_co_nguon_goc"/>
                                     </group>
                                     <group>
                                         <field name="xem_xe_tai"/>
                                         <field name="ten_dong_co"/>
                                         <field name="dung_tich"/>
                                         <field name="dang_kiem_toi"/>
+                                        <field name="tinh_trang_xe"/>
+
                                     </group>
                                 </group>
 

@@ -26,22 +26,21 @@
                         </ol>
                     </nav>
                     <h2 class="col-12 text-success text-center mt-5 mb-2 mt-2">XE ĐANG RAO BÁN</h2>
-                    <div class="col-12 product_pager form-inline justify-content-center mt-3 mb-3 mr-2">
-                        <form action="/list_xe/" method="get" enctype="multipart/form-data" name="list_xe"
-                              class="s_website_form form-horizontal container-fluid mt32 mb-2">
-                        </form>
-                    </div>
+<!--                    <div class="col-12 product_pager form-inline justify-content-center mt-3 mb-3 mr-2">-->
+<!--                        <form action="/list_xe/" method="get" enctype="multipart/form-data" name="list_xe"-->
+<!--                              class="s_website_form form-horizontal container-fluid mt32 mb-2">-->
+<!--                        </form>-->
+<!--                    </div>-->
                     <div class="row pd-2 mr-2">
                         <t t-foreach="XETAI" t-as="s">
-                            <div class="col-4 mb-3 text-center">
-
+                            <div class="col-12 mb-3 text-left col-lg-4">
                                 <a t-att-href="'/list_xe/details/%s' %slug(s)" intemprop="url"
                                    target="">
                                     <img t-att-src="'/web/image/xe.xetaicu/%s/img_xe' % s.id" alt="img"
                                          style="width:250px"/>
                                 </a>
                             </div>
-                            <div class="col-8 mb-3 text-left">
+                            <div class="col-12 col-lg-4 mb-3 text-left">
                                 <h4>
                                     Tên xe:
                                     <a t-att-href="'/list_xe/details/%s' %slug(s)" intemprop="url"
@@ -142,27 +141,21 @@
                                     <t t-if="xe.sudo().hang_xe == 'hn'">
                                         HINO
                                     </t>
-
                                     <t t-if="xe.sudo().hang_xe == 'is'">
                                         ISUZU
                                     </t>
-
                                     <t t-if="xe.sudo().hang_xe == 'hd'">
                                         HYNDAI
                                     </t>
-
                                     <t t-if="xe.sudo().hang_xe == 'fu'">
                                         FUSO
                                     </t>
-
                                     <t t-if="xe.sudo().hang_xe == 'da'">
                                         DAEWOO
                                     </t>
-
                                     <t t-if="xe.sudo().hang_xe == 'th'">
                                         THACO
                                     </t>
-
                                     <t t-if="xe.sudo().hang_xe == 'ja'">
                                         JAC
                                     </t>
@@ -238,10 +231,36 @@
                                 </td>
                             </tr>
                             <tr>
+                                <td>Tình trạng xe</td>
+
+                                <td>
+                                    <t t-if="xe.sudo().tinh_trang_xe =='1'">
+                                        <t t-set="tinhtrang" t-value="'Hoạt động tốt'"/>
+                                    </t>
+                                    <t t-if="xe.sudo().tinh_trang_xe =='2'">
+                                        <t t-set="tinhtrang" t-value="'Đã qua sử dụng - Đang bảo dưỡng'"/>
+                                    </t>
+                                    <t t-if="xe.sudo().tinh_trang_xe =='3'">
+                                        <t t-set="tinhtrang" t-value="'Đang bị phạt nguội'"/>
+                                    </t>
+                                    <t t-if="xe.sudo().tinh_trang_xe =='4'">
+                                        <t t-set="tinhtrang" t-value="'Đang tranh chấp'"/>
+                                    </t>
+                                    <t t-if="xe.sudo().tinh_trang_xe =='5'">
+                                        <t t-set="tinhtrang" t-value="'Máy móc cabin nguyên zin'"/>
+                                    </t>
+                                    <t t-if="xe.sudo().tinh_trang_xe =='6'">
+                                        <t t-set="tinhtrang" t-value="'Xe đã bị lỗi'"/>
+                                    </t>
+                                    <t t-esc="tinhtrang"/>
+                                </td>
+                            </tr>
+                            <tr>
                                 <td>Liên hệ</td>
                                 <td>
-                                    <t t-set="mobile" t-value="company.mobile"/>
-                                    <a t-att-href="'tel:'+mobile" class="btn btn-sm btn-primary">Gọi ngay</a>
+<!--                                    <t t-set="mobile" t-value="company.mobile"/>-->
+<!--                                    <a t-att-href="'tel:'+mobile" class="btn btn-sm btn-primary">Gọi ngay</a>-->
+                                    <a href="tel:0986627891" class="btn btn-sm btn-primary">Gọi ngay</a>
                                 </td>
                             </tr>
                         </table>

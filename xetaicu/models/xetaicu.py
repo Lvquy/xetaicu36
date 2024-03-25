@@ -43,6 +43,14 @@ class Xetai(models.Model):
     dung_tich = fields.Integer(string='Dung tích')
     dang_kiem_toi = fields.Char(string='Đăng kiểm tới')
     xem_xe_tai = fields.Char(string='Xem xe tại')
+    xe_co_nguon_goc = fields.Boolean(string='Xe có nguồn gốc')
+    tinh_trang_xe = fields.Selection([('1','Hoạt động tốt'),
+                                      ('2','Đã qua sử dụng - Đang bảo dưỡng'),
+                                      ('3','Đang bị phạt nguội'),
+                                      ('4','Đang tranh chấp'),
+                                      ('5','Máy móc cabin nguyên zin'),
+                                      ('6','Xe đã bị lỗi'),
+                                      ],string='Tình trạng xe')
     hang_xe = fields.Selection([
         ('0', 'Chọn hãng xe'),
         ('hn', 'HINO'),
@@ -79,8 +87,17 @@ class Xetai(models.Model):
     gia_dang_ban = fields.Char(string='Giá đăng bán trên website')
     mua_tu = fields.Many2one('partner.xetaicu', string='Mua từ đâu', readonly=True)
     ban_cho = fields.Many2one('partner.xetaicu', string='Bán cho ai', readonly=True)
-    chiphi_suachua = fields.Integer(string='Chi phí sửa chữa')
+    chiphi_suachua = fields.One2many(comodel_name='chiphi.sua', inverse_name='ref_xe',string='Chi phí sửa chữa')
+    chiphi_suachua_total = fields.Integer(string='Tổng chi phí',compute='compute_chiphi')
 
+    @api.onchange('chiphi_suachua')
+    def compute_chiphi(self):
+        for rec in self:
+            rec.chiphi_suachua_total = 0
+            if rec.chiphi_suachua:
+                for i in rec.chiphi_suachua:
+                    rec.chiphi_suachua_total += i.so_tien
+            else: rec.chiphi_suachua_total = 0
     def change_dang_ban(self):
         for rec in self:
             if rec.status == 'kho':
@@ -97,10 +114,10 @@ class Xetai(models.Model):
         for rec in self:
             rec.status = '0'
 
-    @api.onchange('gia_mua','gia_ban','chiphi_suachua')
+    @api.onchange('gia_mua','gia_ban','chiphi_suachua_total')
     def compute_loi(self):
         for rec in self:
-            rec.loi  = rec.gia_ban - rec.gia_mua - rec.chiphi_suachua
+            rec.loi  = rec.gia_ban - rec.gia_mua - rec.chiphi_suachua_total
 
     def name_get(self):
         result = []
@@ -126,6 +143,7 @@ class Muaxe(models.Model):
     status = fields.Selection([('0', 'Nháp'), ('1', 'Đã xác nhận')], string='Trạng thái')
     note = fields.Text(string='Ghi chú')
     gia = fields.Integer(string='Giá')
+    loc_chu_xe = fields.Integer(string='Lộc của chủ xe')
 
     def confirm_don(self):
         for rec in self:
@@ -140,7 +158,7 @@ class Muaxe(models.Model):
                 rec.xe.ngay_mua = rec.ngay_mua
                 rec.xe.don_mua = rec.id
                 rec.xe.gia_mua = rec.gia
-                rec.xe.loi = rec.xe.gia_ban - rec.xe.gia_mua - rec.xe.chiphi_suachua
+                rec.xe.loi = rec.xe.gia_ban - rec.xe.gia_mua - rec.xe.chiphi_suachua_total
                 rec.xe.mua_tu = rec.nguoi_ban
 
     def unconfirm_don(self):
@@ -151,7 +169,7 @@ class Muaxe(models.Model):
                 rec.xe.status = '0'
                 rec.xe.ngay_mua = False
                 rec.xe.don_mua = False
-                rec.xe.loi = rec.xe.gia_ban - rec.xe.gia_mua - rec.xe.chiphi_suachua
+                rec.xe.loi = rec.xe.gia_ban - rec.xe.gia_mua - rec.xe.chiphi_suachua_total
                 rec.xe.mua_tu = False
 
 
@@ -184,7 +202,7 @@ class Banxe(models.Model):
                 rec.xe.ngay_ban = rec.ngay_ban
                 rec.xe.don_ban = rec.id
                 rec.xe.gia_ban = rec.gia
-                rec.xe.loi = rec.xe.gia_ban - rec.xe.gia_mua - rec.xe.chiphi_suachua
+                rec.xe.loi = rec.xe.gia_ban - rec.xe.gia_mua - rec.xe.chiphi_suachua_total
                 rec.xe.ban_cho = rec.nguoi_mua
                 rec.xe.dang_ban = False
 
@@ -196,5 +214,15 @@ class Banxe(models.Model):
                 rec.xe.ngay_ban = False
                 rec.xe.don_ban = False
                 rec.xe.gia_ban = 0
-                rec.xe.loi = rec.xe.gia_ban - rec.xe.gia_mua - rec.xe.chiphi_suachua
+                rec.xe.loi = rec.xe.gia_ban - rec.xe.gia_mua - rec.xe.chiphi_suachua_total
                 rec.xe.ban_cho = False
+
+class ChiphiSua(models.Model):
+    _name='chiphi.sua'
+    _rec_name = 'name'
+    _description = 'Chi phi sua xe'
+
+    name = fields.Char(string='Tên loại chi phí', required=True)
+    so_tien = fields.Integer(string='Số tiền')
+    ngay_chi = fields.Date(string='Ngày chi tiền')
+    ref_xe = fields.Many2one('xe.xetaicu', string='Chi phí cho xe')

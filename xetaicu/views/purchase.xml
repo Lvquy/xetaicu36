@@ -33,6 +33,7 @@
                                 <field name="xe" domain="[('status','=','0')]"
                                        options="{'no_open': False, 'no_create': True , 'no_quick_create': True}"/>
                                 <field name="gia"/>
+                                <field name="loc_chu_xe"/>
                             </group>
                         </group>
                         <notebook>
