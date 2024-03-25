@@ -124,7 +124,6 @@
                     <field name="gia_dang_ban"/>
                     <field name="ngay_ban"/>
                     <field name="gia_ban"/>
-                    <field name="chiphi_suachua"/>
                     <field name="loi"/>
                     <field name="status"/>
                 </tree>
