@@ -120,7 +120,7 @@
                     <field name="bien_ks"/>
                     <field name="ngay_mua"/>
                     <field name="gia_mua"/>
-                    <field name="chiphi_suachua"/>
+                    <field name="chiphi_suachua_total"/>
                     <field name="gia_dang_ban"/>
                     <field name="ngay_ban"/>
                     <field name="gia_ban"/>
